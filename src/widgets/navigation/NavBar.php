@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://github.com/MacGyer/yii2-materializecss
  * @copyright Copyright (c) 2016 ... MacGyer for pluspunkt coding
@@ -40,6 +41,7 @@ use Yii;
  */
 class NavBar extends BaseWidget
 {
+
     /**
      * @var array the HTML attributes for the widget container tag. The following special options are recognized:
      *
@@ -127,11 +129,6 @@ class NavBar extends BaseWidget
             $html[] = Html::a($this->brandLabel, $this->brandUrl === false ? Yii::$app->homeUrl : $this->brandUrl, $this->brandOptions);
         }
 
-        if (!isset($this->containerOptions['id'])) {
-            $this->containerOptions['id'] = "{$this->id}-collapse";
-        }
-        $html[] = Html::beginTag('div', $this->containerOptions);
-
         echo implode("\n", $html);
     }
 
@@ -141,14 +138,13 @@ class NavBar extends BaseWidget
     public function run()
     {
         $html = [];
-        $html[] = Html::endTag('div'); // container
 
-        $html[] = Html::endTag('div'); // nav-wrapper
+        $html[] = "\n" . Html::endTag('div'); // nav-wrapper
 
-        $html[] = Html::endTag('nav');
+        $html[] = Html::endTag('nav') . "\n";
 
         if ($this->fixed) {
-            $html[] = Html::endTag('div');
+            $html[] = "\n" . Html::endTag('div');
         }
 
         MaterializePluginAsset::register($this->getView());
