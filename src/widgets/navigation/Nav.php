@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://github.com/MacGyer/yii2-materializecss
  * @copyright Copyright (c) 2016 ... MacGyer for pluspunkt coding
@@ -48,6 +49,7 @@ use yii\helpers\ArrayHelper;
  */
 class Nav extends BaseWidget
 {
+
     /**
      * @var array list of items in the nav widget. Each array element represents a single
      * menu item which can be either a string or an array with the following structure:
@@ -251,12 +253,12 @@ class Nav extends BaseWidget
     protected function renderDropdown($items, $parentItem, $targetId)
     {
         return Dropdown::widget([
-            'toggleTarget' => $targetId,
-            'options' => ArrayHelper::getValue($parentItem, 'dropDownOptions', []),
-            'items' => $items,
-            'encodeLabels' => $this->encodeLabels,
-            'clientOptions' => false,
-            'view' => $this->getView(),
+                'toggleTarget' => $targetId,
+                'options' => ArrayHelper::getValue($parentItem, 'dropDownOptions', []),
+                'items' => $items,
+                'encodeLabels' => $this->encodeLabels,
+                'clientOptions' => false,
+                'view' => $this->getView(),
         ]);
     }
 
@@ -267,9 +269,9 @@ class Nav extends BaseWidget
     protected function renderSideNav()
     {
         return SideNav::widget([
-            'items' => $this->items,
-            'toggleButtonOptions' => $this->sideNavToggleButtonOptions,
-            'clientOptions' => $this->sideNavClientOptions,
+                'items' => $this->items,
+                'toggleButtonOptions' => $this->sideNavToggleButtonOptions,
+                'clientOptions' => $this->sideNavClientOptions,
         ]);
     }
 

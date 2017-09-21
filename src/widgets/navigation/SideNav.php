@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://github.com/MacGyer/yii2-materializecss
  * @copyright Copyright (c) 2016 ... MacGyer for pluspunkt coding
@@ -25,6 +26,7 @@ use yii\helpers\ArrayHelper;
  */
 class SideNav extends Nav
 {
+
     /**
      * @var array list of items in the nav widget. Each array element represents a single
      * menu item which can be either a string or an array with the following structure:
@@ -85,7 +87,7 @@ class SideNav extends Nav
             ];
         }
 
-        Html::addCssClass($this->toggleButtonOptions['options'], ['toggleButton' => 'sidenav-toggle']);
+//        Html::addCssClass($this->toggleButtonOptions['options'], ['toggleButton' => 'sidenav-toggle']);
         $this->toggleButtonOptions['options']['data-activates'] = $this->options['id'];
     }
 
@@ -114,6 +116,13 @@ class SideNav extends Nav
         foreach ($this->items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
                 continue;
+            }
+            if (isset($this->clientOptions['link'])) {
+                if (isset($item['linkOptions'])) {
+                    $item['linkOptions'] = ArrayHelper::merge($item['linkOptions'], $this->clientOptions['link']);
+                } else {
+                    $item['linkOptions'] = $this->clientOptions['link'];
+                }
             }
             $items[] = $this->renderItem($item);
         }
@@ -176,12 +185,18 @@ class SideNav extends Nav
     /**
      * Renders the side navigation toggle button.
      *
-     * @see Button|Button
      * @return string
      */
     protected function renderToggleButton()
     {
-        return Button::widget($this->toggleButtonOptions);
+        $options = [
+            'data-activates' => $this->options['id'],
+            'class' => 'button-collapse',
+        ];
+        if (isset($this->toggleButtonOptions['options'])) {
+            Html::addCssClass($options, $this->toggleButtonOptions['options']['class']);
+        }
+        return Html::a($this->toggleButtonOptions['content'], '#', $options);
     }
 
     /**
@@ -189,7 +204,7 @@ class SideNav extends Nav
      */
     protected function registerClientScript()
     {
-        $this->registerPlugin('sideNav', '.sidenav-toggle');
+        $this->registerPlugin('sideNav', '.button-collapse');
     }
 
     /**
