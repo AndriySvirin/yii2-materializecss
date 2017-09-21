@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "andriysvirin\\yii2materializecss\\": "src"
+            "macgyer\\yii2materializecss\\": "src"
         }
     }
 }
