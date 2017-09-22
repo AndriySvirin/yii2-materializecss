@@ -22,12 +22,6 @@ class MaterializePluginAsset extends AssetBundle
      */
     public $sourcePath = '@bower/materialize/dist';
     
-    /**
-     * @var array list of JS files that this bundle contains.
-     */
-    public $js = [
-        'js/materialize.min.js'
-    ];
 
     /**
      * @var array list of bundle class names that this bundle depends on.
