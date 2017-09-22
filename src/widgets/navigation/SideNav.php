@@ -204,7 +204,7 @@ class SideNav extends Nav
      */
     protected function registerClientScript()
     {
-        $this->registerPlugin('sideNav', '.button-collapse');
+//        $this->registerPlugin('sideNav', '.button-collapse');
     }
 
     /**
