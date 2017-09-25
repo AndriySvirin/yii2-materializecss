@@ -67,6 +67,12 @@ class SideNav extends Nav
     public $toggleButtonOptions = [];
 
     /**
+     * Link options.
+     * @var array 
+     */
+    public $linkOptions = [];
+
+    /**
      * Initializes the widget.
      * @throws InvalidConfigException
      */
@@ -87,7 +93,6 @@ class SideNav extends Nav
             ];
         }
 
-//        Html::addCssClass($this->toggleButtonOptions['options'], ['toggleButton' => 'sidenav-toggle']);
         $this->toggleButtonOptions['options']['data-activates'] = $this->options['id'];
     }
 
@@ -117,11 +122,11 @@ class SideNav extends Nav
             if (isset($item['visible']) && !$item['visible']) {
                 continue;
             }
-            if (isset($this->clientOptions['link'])) {
+            if (!empty($this->linkOptions)) {
                 if (isset($item['linkOptions'])) {
-                    $item['linkOptions'] = ArrayHelper::merge($item['linkOptions'], $this->clientOptions['link']);
+                    $item['linkOptions'] = ArrayHelper::merge($item['linkOptions'], $this->linkOptions);
                 } else {
-                    $item['linkOptions'] = $this->clientOptions['link'];
+                    $item['linkOptions'] = $this->linkOptions;
                 }
             }
             $items[] = $this->renderItem($item);
@@ -204,7 +209,7 @@ class SideNav extends Nav
      */
     protected function registerClientScript()
     {
-//        $this->registerPlugin('sideNav', '.button-collapse');
+        $this->registerPlugin('sideNav', '#' . $this->getToggleId());
     }
 
     /**

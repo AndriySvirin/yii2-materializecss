@@ -123,6 +123,12 @@ class Nav extends BaseWidget
      * @see http://materializecss.com/side-nav.html#options
      */
     public $sideNavClientOptions = [];
+    
+    /**
+     * SideNav link options.
+     * @var array 
+     */
+    public $sideNavLinkOptions = [];
 
     /**
      * @var array the configuration options for the toggle button.
@@ -272,6 +278,7 @@ class Nav extends BaseWidget
                 'items' => $this->items,
                 'toggleButtonOptions' => $this->sideNavToggleButtonOptions,
                 'clientOptions' => $this->sideNavClientOptions,
+                'linkOptions' => $this->sideNavLinkOptions,
         ]);
     }
 
