@@ -130,7 +130,6 @@ class Select extends BaseInputWidget
      */
     public function run()
     {
-        \ChromePhp::log('Ok');
         if ($this->hasModel()) {
             $html = Html::activeDropDownList($this->model, $this->attribute, $this->items, $this->options);
         } else {
