@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://github.com/MacGyer/yii2-materializecss
  * @copyright Copyright (c) 2016 ... MacGyer for pluspunkt coding
@@ -25,6 +26,7 @@ use macgyer\yii2materializecss\lib\Html;
  */
 class DatePicker extends BaseInputWidget
 {
+
     /**
      * @var array the options for the underlying datepicker JS plugin.
      * Please refer to the corresponding [documentation web page](http://amsul.ca/pickadate.js/).
@@ -53,10 +55,10 @@ class DatePicker extends BaseInputWidget
 
         if ($this->hasModel()) {
             $this->options['data-value'] = isset($this->value) ? $this->value : Html::getAttributeValue($this->model, $this->attribute);
-            return Html::activeInput('date', $this->model, $this->attribute, $this->options);
+            return Html::activeInput('text', $this->model, $this->attribute, $this->options);
         } else {
             $this->options['data-value'] = $this->value;
-            return Html::input('date', $this->name, $this->value, $this->options);
+            return Html::input('text', $this->name, $this->value, $this->options);
         }
     }
 }

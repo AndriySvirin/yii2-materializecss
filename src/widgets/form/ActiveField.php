@@ -270,7 +270,7 @@ class ActiveField extends \yii\widgets\ActiveField
         MaterializePluginAsset::register($view);
         $id = $this->getInputId();
 
-        $js = "$('#$id').material_select()";
+        $js = "jQuery('#$id').material_select();";
         $view->registerJs($js);
 
         return parent::dropDownList($items, $options);
