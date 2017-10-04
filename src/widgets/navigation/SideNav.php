@@ -194,7 +194,11 @@ class SideNav extends Nav
             Html::addCssClass($options, 'active');
         }
 
-        return Html::tag('li', Html::a($label, $url, $linkOptions) . $items, $options);
+        if (!empty($this->dropdown)) {
+            return Html::tag('li', Html::tag('span', $label, $linkOptions) . $items, $options);
+        } else {
+            return Html::tag('li', Html::a($label, $url, $linkOptions) . $items, $options);
+        }
     }
 
     /**
@@ -205,7 +209,7 @@ class SideNav extends Nav
      */
     protected function customDropdown(&$label, &$linkOptions, &$items)
     {
-        Html::addCssClass($linkOptions, 'toggle-target sidenav-sub-menu');
+        Html::addCssClass($linkOptions, 'toggle-target sidenav-sub-menu-link');
         $linkOptions['data-activates'] = 'sidenav-sub-menu-' . md5(uniqid());
         $itemsRender = Html::tag('li', Html::a($this->dropdown['caret_backward'] . ' ' . $label, '#', $this->dropdown['backLink']));
         $label .= ' ' . $this->dropdown['caret_forward'];
