@@ -173,6 +173,7 @@ class SideNav extends Nav
         } else {
             if (!empty($this->dropdown)) {
                 $this->customDropdown($label, $linkOptions, $items);
+                return Html::tag('li', Html::tag('span', $label, $linkOptions) . $items, $options);
             } else {
                 $toggleTarget = 'dropdown_' . md5(uniqid());
                 $linkOptions['data-activates'] = $toggleTarget;
@@ -194,11 +195,7 @@ class SideNav extends Nav
             Html::addCssClass($options, 'active');
         }
 
-        if (!empty($this->dropdown)) {
-            return Html::tag('li', Html::tag('span', $label, $linkOptions) . $items, $options);
-        } else {
-            return Html::tag('li', Html::a($label, $url, $linkOptions) . $items, $options);
-        }
+        return Html::tag('li', Html::a($label, $url, $linkOptions) . $items, $options);
     }
 
     /**
