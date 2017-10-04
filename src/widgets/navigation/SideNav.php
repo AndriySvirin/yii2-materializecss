@@ -219,6 +219,8 @@ class SideNav extends Nav
                 'class' => 'sidenav-sub-menu-items',
                 'id' => $linkOptions['data-activates'],
         ]);
+        $view = $this->getView();
+        $view->registerJs("jQuery('#{$linkOptions['data-activates']}').sideNavSubMenu();");
     }
 
     /**
