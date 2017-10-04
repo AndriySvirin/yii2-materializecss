@@ -73,6 +73,12 @@ class SideNav extends Nav
     public $linkOptions = [];
 
     /**
+     * Dropdown.
+     * @var array 
+     */
+    public $dropdown = [];
+
+    /**
      * Initializes the widget.
      * @throws InvalidConfigException
      */
@@ -165,18 +171,22 @@ class SideNav extends Nav
         if (empty($items)) {
             $items = '';
         } else {
-            $toggleTarget = 'dropdown_' . md5(uniqid());
-            $linkOptions['data-activates'] = $toggleTarget;
-            Html::addCssClass($options, ['widget' => 'dropdown']);
-            Html::addCssClass($linkOptions, ['widget' => 'dropdown-button']);
-            if ($this->dropDownCaret !== '') {
-                $label .= ' ' . $this->dropDownCaret;
-            }
-            if (is_array($items)) {
-                if ($this->activateItems) {
-                    $items = $this->isChildActive($items, $active);
+            if (!empty($this->dropdown)) {
+                $this->customDropdown($label, $linkOptions, $items);
+            } else {
+                $toggleTarget = 'dropdown_' . md5(uniqid());
+                $linkOptions['data-activates'] = $toggleTarget;
+                Html::addCssClass($options, ['widget' => 'dropdown']);
+                Html::addCssClass($linkOptions, ['widget' => 'dropdown-button']);
+                if ($this->dropDownCaret !== '') {
+                    $label .= ' ' . $this->dropDownCaret;
                 }
-                $items = $this->renderDropdown($items, $item, $toggleTarget);
+                if (is_array($items)) {
+                    if ($this->activateItems) {
+                        $items = $this->isChildActive($items, $active);
+                    }
+                    $items = $this->renderDropdown($items, $item, $toggleTarget);
+                }
             }
         }
 
@@ -185,6 +195,28 @@ class SideNav extends Nav
         }
 
         return Html::tag('li', Html::a($label, $url, $linkOptions) . $items, $options);
+    }
+
+    /**
+     * Custom dropdown.
+     * @param string $label
+     * @param array $linkOptions
+     * @param array|string $items
+     */
+    protected function customDropdown(&$label, &$linkOptions, &$items)
+    {
+        Html::addCssClass($linkOptions, 'toggle-target sidenav-sub-menu');
+        $linkOptions['data-activates'] = 'sidenav-sub-menu-' . md5(uniqid());
+        $itemsRender = Html::tag('li', Html::a($this->dropdown['caret_backward'] . ' ' . $label, '#', $this->dropdown['backLink']));
+        $label .= ' ' . $this->dropdown['caret_forward'];
+        foreach ($items as $item) {
+            Html::addCssClass($item['linkOptions'], $this->linkOptions);
+            $itemsRender .= Html::tag('li', Html::a($item['label'], $item['url'], $item['linkOptions']));
+        }
+        $items = Html::tag('ul', $itemsRender, [
+                'class' => 'sidenav-sub-menu-items',
+                'id' => $linkOptions['data-activates'],
+        ]);
     }
 
     /**

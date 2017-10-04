@@ -123,7 +123,19 @@ class Nav extends BaseWidget
      * @see http://materializecss.com/side-nav.html#options
      */
     public $sideNavClientOptions = [];
-    
+
+    /**
+     * SideNav Dropdown.
+     * @var array 
+     */
+    public $sideNavDropdown = [];
+
+    /**
+     * SideNav items.
+     * @var array 
+     */
+    public $sideNavItems = [];
+
     /**
      * SideNav link options.
      * @var array 
@@ -275,10 +287,11 @@ class Nav extends BaseWidget
     protected function renderSideNav()
     {
         return SideNav::widget([
-                'items' => $this->items,
+                'items' => !empty($this->sideNavItems) ? $this->sideNavItems : $this->items,
                 'toggleButtonOptions' => $this->sideNavToggleButtonOptions,
                 'clientOptions' => $this->sideNavClientOptions,
                 'linkOptions' => $this->sideNavLinkOptions,
+                'dropdown' => $this->sideNavDropdown,
         ]);
     }
 
