@@ -211,7 +211,8 @@ class SideNav extends Nav
     {
         Html::addCssClass($linkOptions, 'toggle-target sidenav-sub-menu-link');
         $linkOptions['data-activates'] = 'sidenav-sub-menu-' . md5(uniqid());
-        $itemsRender = Html::tag('li', Html::a($this->dropdown['caret_backward'] . ' ' . $label, '#', $this->dropdown['backLink']));
+        $backLinkOptions = array_merge(['data-activates' => $linkOptions['data-activates']], $this->dropdown['backLink']);
+        $itemsRender = Html::tag('li', Html::tag('span', $this->dropdown['caret_backward'] . ' ' . $label, $backLinkOptions));
         $label .= ' ' . $this->dropdown['caret_forward'];
         foreach ($items as $item) {
             Html::addCssClass($item['linkOptions'], $this->linkOptions);
