@@ -92,7 +92,7 @@ class SideNav extends Nav
                 'type' => Button::TYPE_FLAT,
             ];
         }
-
+        $this->toggleButtonOptions['options']['id'] = 'button-collapse-' . $this->options['id'];
         $this->toggleButtonOptions['options']['data-activates'] = $this->options['id'];
     }
 
@@ -200,6 +200,7 @@ class SideNav extends Nav
         ];
         if (isset($this->toggleButtonOptions['options'])) {
             Html::addCssClass($options, $this->toggleButtonOptions['options']['class']);
+            $options['id'] = $this->toggleButtonOptions['options']['id'];
         }
         return Html::a($this->toggleButtonOptions['content'], '#', $options);
     }
@@ -209,7 +210,7 @@ class SideNav extends Nav
      */
     protected function registerClientScript()
     {
-        $this->registerPlugin('sideNav', '#' . $this->getToggleId());
+        $this->registerPlugin('sideNav', '#' . $this->toggleButtonOptions['options']['id']);
     }
 
     /**
