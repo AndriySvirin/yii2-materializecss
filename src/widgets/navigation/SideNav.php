@@ -212,6 +212,9 @@ class SideNav extends Nav
         $itemsRender = Html::tag('li', Html::tag('span', $this->dropdown['caret_backward'] . ' ' . $label, $backLinkOptions));
         $label .= ' ' . $this->dropdown['caret_forward'];
         foreach ($items as $item) {
+            if (isset($item['visible']) && !$item['visible']) {
+                continue;
+            }
             Html::addCssClass($item['linkOptions'], $this->linkOptions);
             $itemsRender .= Html::tag('li', Html::a($item['label'], $item['url'], $item['linkOptions']));
         }
