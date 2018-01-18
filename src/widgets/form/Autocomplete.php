@@ -52,11 +52,11 @@ class Autocomplete extends \yii\base\Widget
     {
         $id = $this->getId();
         $options = empty($this->clientOptions) ? '' : Json::encode($this->clientOptions);
-        $this->getView()->registerJs(''
-            . 'jQuery(document).mouseup(function (e) {'
-            . '  var container = jQuery("#wrapper-' . $id . ' .autocomplete-suggestions");
+        $this->getView()->registerJs('
+            jQuery(document).mouseup(function (e) {
+              var container = jQuery("#wrapper-' . $id . ' .autocomplete-suggestions");
                   if (container.has(e.target).length === 0){container.hide();}
-               });
+            });
             jQuery(document).keydown(function (e) {
                 var container = $("#wrapper-' . $id . ' .autocomplete-suggestions");
                 if (e.which === 27){container.hide();}   
